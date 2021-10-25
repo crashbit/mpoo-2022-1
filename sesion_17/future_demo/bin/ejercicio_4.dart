@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+
+import 'Todo.dart';
 
 void main() {
   getJson();
@@ -11,6 +15,9 @@ Future<void> getJson() async {
 
   print(response.statusCode);
   if (response.statusCode == 200) {
-    print(response.body);
+    final respuestaJson = response.body;
+    final jsonMap = jsonDecode(respuestaJson);
+    final todo = Todo.fromJson(jsonMap);
+    print(todo.title);
   }
 }
